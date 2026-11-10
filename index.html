@@ -146,12 +146,9 @@
 
         // Form submission handler
         form.addEventListener('submit', e => {
-            e.preventDefault(); // Prevent standard page reload
+            e.preventDefault(); // ป้องกันการรีเฟรชหน้าเว็บ
 
-            // Prepare form data
-            const formData = new FormData(form);
-
-            // Show SweetAlert2 loading state
+            // แสดงสถานะกำลังโหลด
             Swal.fire({
                 title: 'กำลังบันทึกข้อมูล...',
                 text: 'กรุณารอสักครู่',
@@ -162,26 +159,36 @@
                 }
             });
 
-            // Demo mode fallback: If the SCRIPT_URL hasn't been changed, simulate a successful save.
+            // ดึงค่าจากฟอร์มมาแปลงเป็น Object JSON
+            const formData = new FormData(form);
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value;
+            });
+
+            // Demo mode ถ้ายังไม่ได้ใส่ URL จริง
             if (SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
                 setTimeout(() => {
                     showSuccessAndReset();
-                }, 1500); // Simulate network request delay
+                }, 1500);
                 return;
             }
 
-            // Real fetch request to Google Apps Script
+            // ส่งข้อมูลด้วยรูปแบบ JSON ไปยัง Google Apps Script
             fetch(SCRIPT_URL, { 
                 method: 'POST', 
-                body: formData 
+                body: JSON.stringify(data)
             })
-            .then(response => {
-                // Assuming the script returns successfully
-                showSuccessAndReset();
+            .then(response => response.json())
+            .then(result => {
+                if (result.result === 'success') {
+                    showSuccessAndReset();
+                } else {
+                    throw new Error(result.error || 'Unknown error');
+                }
             })
             .catch(error => {
-                console.error('Error!', error.message);
-                // Show error alert
+                console.error('Error!', error);
                 Swal.fire({
                     icon: 'error',
                     title: 'เกิดข้อผิดพลาด!',
