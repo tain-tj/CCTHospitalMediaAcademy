@@ -124,22 +124,25 @@
 
         // Function to show/hide the location dropdown based on attendance selection
         function toggleLocationField() {
-            const attendanceValue = document.querySelector('input[name="attendance"]:checked').value;
+            // 1. ดึง element ออกมาก่อน (ยังไม่ดึง .value)
+            const attendanceInput = document.querySelector('input[name="attendance"]:checked');
             
+            // 2. ถ้าผู้ใช้ยังไม่ได้คลิกเลือก ให้หยุดฟังก์ชันนี้ไว้ก่อนเพื่อไม่ให้เกิด Error
+            if (!attendanceInput) return; 
+        
+            // 3. ถ้ามีการเลือกแล้ว ค่อยดึงค่าไปประมวลผลต่อ
+            const attendanceValue = attendanceInput.value;
+            const locationContainer = document.getElementById('locationContainer'); 
+        
+            // แก้ไขตรงนี้: เปลี่ยนคำให้ตรงกับ value ใน HTML คือ "เข้าร่วมได้"
             if (attendanceValue === 'เข้าร่วมได้') {
-                // Show location dropdown and make it required
-                locationContainer.classList.remove('hidden');
-                // Slight delay for smooth opacity transition
-                setTimeout(() => locationContainer.classList.remove('opacity-0'), 10); 
-                locationSelect.setAttribute('required', 'required');
+                locationContainer.classList.remove('hidden'); 
+                locationContainer.classList.remove('opacity-0'); // เพิ่มเพื่อให้เห็นแอนิเมชันชัดเจนขึ้น
             } else {
-                // Hide location dropdown and remove requirement
+                locationContainer.classList.add('hidden'); 
                 locationContainer.classList.add('opacity-0');
-                setTimeout(() => locationContainer.classList.add('hidden'), 300); // Wait for transition
-                locationSelect.removeAttribute('required');
-                locationSelect.value = ''; // Reset selection
             }
-        }
+        }     
 
         // Form submission handler
         form.addEventListener('submit', e => {
