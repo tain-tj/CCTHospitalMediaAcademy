@@ -1,3 +1,8 @@
+ปรับปรุงโค้ดให้ช่อง **"รูปแบบการเข้าร่วม"** กลายเป็นช่องที่ **บังคับเลือก (Required)** ทันทีเมื่อผู้ใช้เลือก "เข้าร่วมได้" แต่จะถูกปิดการบังคับและล้างค่าออกอัตโนมัติหากเลือก "ไม่สามารถเข้าร่วมได้" เพื่อป้องกันปัญหาติด Validation เวลาไม่ได้เข้าร่วมครับ
+
+คุณสามารถคัดลอกโค้ดชุดสมบูรณ์ด้านล่างนี้ไปวางทับในไฟล์ `index.html` ของคุณได้เลยครับ:
+
+```html
 <!DOCTYPE html>
 <html lang="th">
 <head>
@@ -19,7 +24,6 @@
             font-family: 'Sarabun', sans-serif;
             background-color: #f3f4f6; /* Tailwind gray-100 */
         }
-        /* Custom radio button colors to match the theme */
         input[type="radio"]:checked {
             accent-color: #2563eb; /* Tailwind blue-600 */
         }
@@ -81,11 +85,11 @@
                     <div class="space-y-3">
                         <label class="flex items-center p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
                             <input type="radio" name="attendance" value="เข้าร่วมได้" required class="w-5 h-5 text-blue-600" onchange="toggleLocationField()">
-                            <span class="ml-3 text-gray-800 font-medium">เข้าร่วมได้ </span>
+                            <span class="ml-3 text-gray-800 font-medium">เข้าร่วมได้</span>
                         </label>
                         <label class="flex items-center p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
                             <input type="radio" name="attendance" value="ไม่สามารถเข้าร่วมได้" required class="w-5 h-5 text-blue-600" onchange="toggleLocationField()">
-                            <span class="ml-3 text-gray-800 font-medium">ไม่สามารถเข้าร่วมได้ </span>
+                            <span class="ml-3 text-gray-800 font-medium">ไม่สามารถเข้าร่วมได้</span>
                         </label>
                     </div>
                 </div>
@@ -112,43 +116,39 @@
 
     <script>
         // ---------------------------------------------------------
-        // Configuration
-        // REPLACE THIS URL with your deployed Google Apps Script URL
+        // Configuration: ใส่ Web App URL ของ Google Apps Script ที่นี่
         // ---------------------------------------------------------
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxD3-cA14WD0OT5251rLsr3foK-MtTmNHcrbsdvfetiHRD-p3jUpQsdvDf4q14vyCbw/exec';
 
-        // DOM Elements
         const form = document.getElementById('rsvpForm');
         const locationContainer = document.getElementById('locationContainer');
         const locationSelect = document.getElementById('location');
 
-        // Function to show/hide the location dropdown based on attendance selection
+        // ฟังก์ชันควบคุมการแสดงผลและกำหนดการบังคับเลือก (Required) ของช่องรูปแบบการเข้าร่วม
         function toggleLocationField() {
-            // 1. ดึง element ออกมาก่อน (ยังไม่ดึง .value)
             const attendanceInput = document.querySelector('input[name="attendance"]:checked');
             
-            // 2. ถ้าผู้ใช้ยังไม่ได้คลิกเลือก ให้หยุดฟังก์ชันนี้ไว้ก่อนเพื่อไม่ให้เกิด Error
             if (!attendanceInput) return; 
         
-            // 3. ถ้ามีการเลือกแล้ว ค่อยดึงค่าไปประมวลผลต่อ
             const attendanceValue = attendanceInput.value;
-            const locationContainer = document.getElementById('locationContainer'); 
         
-            // แก้ไขตรงนี้: เปลี่ยนคำให้ตรงกับ value ใน HTML คือ "เข้าร่วมได้"
             if (attendanceValue === 'เข้าร่วมได้') {
                 locationContainer.classList.remove('hidden'); 
-                locationContainer.classList.remove('opacity-0'); // เพิ่มเพื่อให้เห็นแอนิเมชันชัดเจนขึ้น
+                locationContainer.classList.remove('opacity-0');
+                locationSelect.required = true; // บังคับให้เลือกเมื่อเข้าร่วมได้
             } else {
                 locationContainer.classList.add('hidden'); 
                 locationContainer.classList.add('opacity-0');
+                locationSelect.required = false; // ยกเลิกการบังคับเมื่อไม่เข้าร่วม
+                locationSelect.value = ''; // ล้างค่าที่เลือกไว้
             }
-        }     
+        }       
 
         // Form submission handler
         form.addEventListener('submit', e => {
-            e.preventDefault(); // ป้องกันการรีเฟรชหน้าเว็บ
+            e.preventDefault(); 
 
-            // แสดงสถานะกำลังโหลด
+            // แสดงสถานะกำลังบันทึก
             Swal.fire({
                 title: 'กำลังบันทึกข้อมูล...',
                 text: 'กรุณารอสักครู่',
@@ -166,7 +166,12 @@
                 data[key] = value;
             });
 
-            // Demo mode ถ้ายังไม่ได้ใส่ URL จริง
+            // หากเลือก "ไม่สามารถเข้าร่วมได้" ให้ส่งค่าช่อง location เป็นค่าว่าง
+            if (data['attendance'] === 'ไม่สามารถเข้าร่วมได้') {
+                data['location'] = 'ไม่เข้าร่วมประชุม';
+            }
+
+            // Demo mode fallback ถ้ายังไม่ได้เปลี่ยน URL
             if (SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
                 setTimeout(() => {
                     showSuccessAndReset();
@@ -174,7 +179,7 @@
                 return;
             }
 
-            // ส่งข้อมูลด้วยรูปแบบ JSON ไปยัง Google Apps Script
+            // ส่งข้อมูลไปยัง Google Apps Script
             fetch(SCRIPT_URL, { 
                 method: 'POST', 
                 body: JSON.stringify(data)
@@ -199,7 +204,7 @@
             });
         });
 
-        // Helper function for success state
+        // Helper function เมื่อบันทึกสำเร็จ
         function showSuccessAndReset() {
             Swal.fire({
                 icon: 'success',
@@ -208,10 +213,12 @@
                 confirmButtonColor: '#2563eb',
                 confirmButtonText: 'ตกลง'
             }).then(() => {
-                form.reset(); // Clear the form
-                toggleLocationField(); // Reset the hidden state of the location dropdown
+                form.reset(); 
+                toggleLocationField(); // ซ่อนกล่องตัวเลือกและรีเซ็ตค่า
             });
         }
     </script>
 </body>
 </html>
+
+```
