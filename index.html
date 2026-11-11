@@ -3,147 +3,323 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>แบบตอบรับเข้าร่วมการประชุม</title>
+    <title>แบบตอบรับ การประชุม CCT Hospital Media Academy งบประมาณ 2026</title>
     
-    <!-- Tailwind CSS for styling -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- SweetAlert2 for beautiful popups -->
+    <!-- SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
-    <!-- Google Fonts: Sarabun (Popular Thai Font) -->
+    <!-- Google Fonts: Sarabun -->
     <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
         body {
             font-family: 'Sarabun', sans-serif;
-            background-color: #f3f4f6; /* Tailwind gray-100 */
+            background-color: #f1f5f9;
         }
         input[type="radio"]:checked {
-            accent-color: #2563eb; /* Tailwind blue-600 */
+            accent-color: #1d4ed8;
         }
     </style>
 </head>
-<body class="min-h-screen flex items-center justify-center p-4 sm:p-8">
+<body class="min-h-screen py-6 px-4 sm:px-6 lg:px-8 flex justify-center items-start">
 
-    <!-- Card Container -->
-    <div class="bg-white rounded-2xl shadow-xl w-full max-w-2xl overflow-hidden">
+    <!-- Main Card Container -->
+    <div class="bg-white rounded-2xl shadow-xl w-full max-w-4xl overflow-hidden border border-gray-100">
         
         <!-- Header Section -->
-        <div class="bg-blue-600 p-6 md:p-8 text-center text-white">
-            <h1 class="text-2xl md:text-3xl font-bold mb-2 leading-tight">แบบตอบรับเข้าร่วมการประชุม</h1>
-            <p class="text-blue-100 md:text-lg">โครงการ CCT Hospital Media Academy<br>วันที่ 30 พฤศจิกายน 2026 เวลา 10.00-12.00 น.<br>ณ ห้องประชุมอาคาร 75 ปี จ.เชียงใหม่</p>
+        <div class="bg-gradient-to-r from-blue-800 to-blue-600 p-6 md:p-8 text-center text-white">
+            <p class="text-xs md:text-sm font-medium text-blue-200 tracking-wide uppercase mb-1">
+                พันธกิจการแพทย์ มูลนิธิแห่งสภาคริสตจักรในประเทศไทย
+            </p>
+            <p class="text-xs text-blue-200 mb-3">
+                Medical Ministry, The Foundation of the Church of Christ in Thailand
+            </p>
+            <h1 class="text-xl md:text-2xl lg:text-3xl font-bold mb-3 leading-snug">
+                แบบตอบรับ การประชุม CCT Hospital Media Academy งบประมาณ 2026
+            </h1>
+            <div class="bg-blue-900/40 rounded-xl p-3 md:p-4 text-sm md:text-base text-blue-50 space-y-1 max-w-2xl mx-auto">
+                <p><strong>วันจันทร์ที่ 30 พฤศจิกายน ค.ศ. 2026 เวลา 10.00 - 12.00 น.</strong></p>
+                <p>โซนภาคเหนือ: ห้องประชุมอาคาร 75 ปี จ.เชียงใหม่ | โซนภาคกลาง: ประชุม Online</p>
+                <p class="text-yellow-300 font-semibold pt-1">
+                    * กรุณาตอบกลับภายในวันที่ 23 พฤศจิกายน ค.ศ. 2026 *
+                </p>
+            </div>
         </div>
 
         <!-- Form Section -->
-        <div class="p-6 md:p-8">
-            <form id="rsvpForm" name="submit-to-google-sheet">
-                
-                <!-- Name and Surname Grid -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                    <div>
-                        <label for="firstName" class="block text-sm font-semibold text-gray-700 mb-1">ชื่อ <span class="text-red-500">*</span></label>
-                        <input type="text" id="firstName" name="firstName" required
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors"
-                            placeholder="ระบุชื่อ">
-                    </div>
-                    <div>
-                        <label for="lastName" class="block text-sm font-semibold text-gray-700 mb-1">นามสกุล <span class="text-red-500">*</span></label>
-                        <input type="text" id="lastName" name="lastName" required
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors"
-                            placeholder="ระบุนามสกุล">
-                    </div>
+        <form id="rsvpForm" class="p-6 md:p-8 space-y-8">
+            
+            <!-- ส่วนที่ 1: ข้อมูลหน่วยงานและรูปแบบการเข้าร่วม -->
+            <div class="space-y-5">
+                <h2 class="text-lg font-bold text-blue-900 border-b-2 border-blue-600 pb-2">
+                    1. ข้อมูลหน่วยงานและรูปแบบการเข้าร่วมประชุม
+                </h2>
+
+                <!-- Hospital / Organization Dropdown -->
+                <div>
+                    <label for="organization" class="block text-sm font-semibold text-gray-700 mb-1">
+                        โรงพยาบาล / หน่วยงาน <span class="text-red-500">*</span>
+                    </label>
+                    <select id="organization" name="organization" required
+                        class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none bg-white transition-colors">
+                        <option value="" disabled selected>-- กรุณาเลือกโรงพยาบาล / หน่วยงาน --</option>
+                        <option value="กรรมการ Hospital Media Academy">กรรมการ Hospital Media Academy</option>
+                        <option value="หน่วยงานสภาคริสตจักรฯ">หน่วยงานสภาคริสตจักรฯ</option>
+                        <option value="โรงพยาบาลแมคคอร์มิค">โรงพยาบาลแมคคอร์มิค</option>
+                        <option value="โรงพยาบาลโอเวอร์บรุ๊ค">โรงพยาบาลโอเวอร์บรุ๊ค</option>
+                        <option value="โรงพยาบาลกรุงเทพคริสเตียน">โรงพยาบาลกรุงเทพคริสเตียน</option>
+                        <option value="โรงพยาบาลกรุงเทพคริสเตียน นครปฐม">โรงพยาบาลกรุงเทพคริสเตียน นครปฐม</option>
+                        <option value="โรงพยาบาลแพร่คริสเตียน">โรงพยาบาลแพร่คริสเตียน</option>
+                        <option value="โรงพยาบาลแวนแซนด์วูร์ด">โรงพยาบาลแวนแซนด์วูร์ด</option>
+                        <option value="โรงพยาบาลคริสเตียนสังขละบุรี">โรงพยาบาลคริสเตียนสังขละบุรี</option>
+                        <option value="สถาบันผู้สูงอายุแมคเคน">สถาบันผู้สูงอายุแมคเคน</option>
+                    </select>
                 </div>
 
-                <!-- Organization -->
-                <div class="mb-4">
-                    <label for="organization" class="block text-sm font-semibold text-gray-700 mb-1">หน่วยงาน <span class="text-red-500">*</span></label>
-                    <input type="text" id="organization" name="organization" required
-                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors"
-                        placeholder="ระบุหน่วยงานที่สังกัด">
-                </div>
-
-                <!-- Position -->
-                <div class="mb-6">
-                    <label for="position" class="block text-sm font-semibold text-gray-700 mb-1">ตำแหน่ง <span class="text-red-500">*</span></label>
-                    <input type="text" id="position" name="position" required
-                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors"
-                        placeholder="ระบุตำแหน่ง">
-                </div>
-
-                <!-- Divider -->
-                <hr class="border-gray-200 mb-6">
-
-                <!-- Attendance Radio Buttons -->
-                <div class="mb-4">
-                    <label class="block text-sm font-semibold text-gray-700 mb-2">การเข้าร่วมประชุม <span class="text-red-500">*</span></label>
-                    <div class="space-y-3">
-                        <label class="flex items-center p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
-                            <input type="radio" name="attendance" value="เข้าร่วมได้" required class="w-5 h-5 text-blue-600" onchange="toggleLocationField()">
-                            <span class="ml-3 text-gray-800 font-medium">เข้าร่วมได้</span>
+                <!-- Attendance Status -->
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">
+                        การเข้าร่วมประชุม <span class="text-red-500">*</span>
+                    </label>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <label class="flex items-center p-3.5 border border-gray-300 rounded-lg cursor-pointer hover:bg-blue-50 transition-colors">
+                            <input type="radio" name="attendance" value="เข้าร่วมได้" required class="w-5 h-5 text-blue-600" onchange="toggleAttendanceFields()" checked>
+                            <span class="ml-3 text-gray-800 font-medium">เข้าร่วมประชุมได้</span>
                         </label>
-                        <label class="flex items-center p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors">
-                            <input type="radio" name="attendance" value="ไม่สามารถเข้าร่วมได้" required class="w-5 h-5 text-blue-600" onchange="toggleLocationField()">
+                        <label class="flex items-center p-3.5 border border-gray-300 rounded-lg cursor-pointer hover:bg-red-50 transition-colors">
+                            <input type="radio" name="attendance" value="ไม่สามารถเข้าร่วมได้" required class="w-5 h-5 text-blue-600" onchange="toggleAttendanceFields()">
                             <span class="ml-3 text-gray-800 font-medium">ไม่สามารถเข้าร่วมได้</span>
                         </label>
                     </div>
                 </div>
 
-                <!-- Conditional Location Dropdown -->
-                <div id="locationContainer" class="mb-8 hidden opacity-0 transition-opacity duration-300">
-                    <label for="location" class="block text-sm font-semibold text-gray-700 mb-1">รูปแบบการเข้าร่วม <span class="text-red-500">*</span></label>
-                    <select id="location" name="location"
-                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none bg-white appearance-none transition-colors">
-                        <option value="" disabled selected>-- กรุณาเลือกรูปแบบ --</option>
-                        <option value="ห้องประชุมอาคาร 75 ปี จ.เชียงใหม่">ห้องประชุมอาคาร 75 ปี จ.เชียงใหม่</option>
-                        <option value="Online">Online</option>
+                <!-- Location Dropdown -->
+                <div id="locationContainer" class="transition-all duration-300">
+                    <label for="location" class="block text-sm font-semibold text-gray-700 mb-1">
+                        รูปแบบการเข้าร่วม <span class="text-red-500">*</span>
+                    </label>
+                    <select id="location" name="location" required
+                        class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none bg-white transition-colors">
+                        <option value="" disabled selected>-- กรุณาเลือกรูปแบบการเข้าร่วม --</option>
+                        <option value="ห้องประชุมอาคาร 75 ปี จ.เชียงใหม่">โซนภาคเหนือ: ห้องประชุมอาคาร 75 ปี จ.เชียงใหม่</option>
+                        <option value="Online">โซนภาคกลาง: ประชุม Online</option>
                     </select>
                 </div>
+            </div>
 
-                <!-- Submit Button -->
-                <button type="submit" 
-                    class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-200 transform hover:-translate-y-0.5">
-                    ส่งข้อมูล (Submit)
+            <!-- ส่วนที่ 2: รายชื่อผู้เข้าร่วมประชุม (1-5) -->
+            <div id="attendeesSection" class="space-y-4">
+                <div class="border-b-2 border-blue-600 pb-2 flex flex-col sm:flex-row sm:items-center sm:justify-between">
+                    <h2 class="text-lg font-bold text-blue-900">
+                        2. รายชื่อผู้เข้าร่วมประชุม (สูงสุด 5 ท่าน)
+                    </h2>
+                    <span class="text-xs text-gray-500 mt-1 sm:mt-0">กรอกเฉพาะจำนวนผู้ที่เข้าร่วมจริง (บังคับอย่างน้อยลำดับที่ 1)</span>
+                </div>
+
+                <!-- ลำดับที่ 1 (อนุศาสก) -->
+                <div class="bg-blue-50/60 p-4 rounded-xl border border-blue-200 space-y-3">
+                    <div class="text-sm font-bold text-blue-800">
+                        ลำดับที่ 1 (อนุศาสก) <span class="text-red-500">*</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                        <div>
+                            <label class="block text-xs font-medium text-gray-600 mb-1">ชื่อ-นามสกุล <span class="text-red-500">*</span></label>
+                            <input type="text" id="name1" name="name1" required placeholder="ระบุชื่อ-นามสกุล"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-gray-600 mb-1">ตำแหน่ง <span class="text-red-500">*</span></label>
+                            <input type="text" id="position1" name="position1" required placeholder="ระบุตำแหน่ง (อนุศาสก)"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-gray-600 mb-1">เบอร์โทรศัพท์ <span class="text-red-500">*</span></label>
+                            <input type="tel" id="phone1" name="phone1" required placeholder="ระบุเบอร์โทรศัพท์"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white text-sm">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ลำดับที่ 2 -->
+                <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 space-y-3">
+                    <div class="text-sm font-semibold text-gray-700">ลำดับที่ 2</div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                        <div>
+                            <label class="block text-xs font-medium text-gray-600 mb-1">ชื่อ-นามสกุล</label>
+                            <input type="text" name="name2" placeholder="ระบุชื่อ-นามสกุล (ถ้ามี)"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-gray-600 mb-1">ตำแหน่ง</label>
+                            <input type="text" name="position2" placeholder="ระบุตำแหน่ง"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-gray-600 mb-1">เบอร์โทรศัพท์</label>
+                            <input type="tel" name="phone2" placeholder="ระบุเบอร์โทรศัพท์"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white text-sm">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ลำดับที่ 3 -->
+                <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 space-y-3">
+                    <div class="text-sm font-semibold text-gray-700">ลำดับที่ 3</div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                        <div>
+                            <label class="block text-xs font-medium text-gray-600 mb-1">ชื่อ-นามสกุล</label>
+                            <input type="text" name="name3" placeholder="ระบุชื่อ-นามสกุล (ถ้ามี)"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-gray-600 mb-1">ตำแหน่ง</label>
+                            <input type="text" name="position3" placeholder="ระบุตำแหน่ง"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-gray-600 mb-1">เบอร์โทรศัพท์</label>
+                            <input type="tel" name="phone3" placeholder="ระบุเบอร์โทรศัพท์"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white text-sm">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ลำดับที่ 4 -->
+                <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 space-y-3">
+                    <div class="text-sm font-semibold text-gray-700">ลำดับที่ 4</div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                        <div>
+                            <label class="block text-xs font-medium text-gray-600 mb-1">ชื่อ-นามสกุล</label>
+                            <input type="text" name="name4" placeholder="ระบุชื่อ-นามสกุล (ถ้ามี)"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-gray-600 mb-1">ตำแหน่ง</label>
+                            <input type="text" name="position4" placeholder="ระบุตำแหน่ง"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-gray-600 mb-1">เบอร์โทรศัพท์</label>
+                            <input type="tel" name="phone4" placeholder="ระบุเบอร์โทรศัพท์"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white text-sm">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ลำดับที่ 5 -->
+                <div class="bg-gray-50 p-4 rounded-xl border border-gray-200 space-y-3">
+                    <div class="text-sm font-semibold text-gray-700">ลำดับที่ 5</div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                        <div>
+                            <label class="block text-xs font-medium text-gray-600 mb-1">ชื่อ-นามสกุล</label>
+                            <input type="text" name="name5" placeholder="ระบุชื่อ-นามสกุล (ถ้ามี)"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-gray-600 mb-1">ตำแหน่ง</label>
+                            <input type="text" name="position5" placeholder="ระบุตำแหน่ง"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-gray-600 mb-1">เบอร์โทรศัพท์</label>
+                            <input type="tel" name="phone5" placeholder="ระบุเบอร์โทรศัพท์"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white text-sm">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ส่วนที่ 3: สื่อคลิปวิดีโอ CCT Medical Ministry Series -->
+            <div class="space-y-5">
+                <div class="border-b-2 border-blue-600 pb-2">
+                    <h2 class="text-lg font-bold text-blue-900">
+                        3. สื่อคลิปวิดีโอ CCT Medical Ministry Series
+                    </h2>
+                    <p class="text-sm font-medium text-blue-700">
+                        “รักษาด้วยรัก ประกาศด้วยชีวิต” (Healing with Love, Sharing Christ through Care)
+                    </p>
+                </div>
+
+                <!-- ชื่อตอน -->
+                <div>
+                    <label for="episodeTitle" class="block text-sm font-semibold text-gray-700 mb-1">
+                        ชื่อตอน
+                    </label>
+                    <input type="text" id="episodeTitle" name="episodeTitle" placeholder="ระบุชื่อตอนของคลิปวิดีโอ"
+                        class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors">
+                </div>
+
+                <!-- ประเด็นนำเสนอ -->
+                <div>
+                    <label for="presentationTopic" class="block text-sm font-semibold text-gray-700 mb-1">
+                        ประเด็นนำเสนอ
+                    </label>
+                    <input type="text" id="presentationTopic" name="presentationTopic" placeholder="ระบุประเด็นนำเสนอหลัก"
+                        class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors">
+                </div>
+
+                <!-- เนื้อเรื่องย่อ -->
+                <div>
+                    <label for="synopsis" class="block text-sm font-semibold text-gray-700 mb-1">
+                        เนื้อเรื่องย่อ
+                    </label>
+                    <textarea id="synopsis" name="synopsis" rows="4" placeholder="สรุปเนื้อเรื่องย่อ หรือแนวทางการดำเนินเรื่อง..."
+                        class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors"></textarea>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="pt-2">
+                <button type="submit"
+                    class="w-full bg-blue-700 hover:bg-blue-800 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 text-lg">
+                    ส่งแบบตอบรับการประชุม
                 </button>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
 
     <script>
-        // ---------------------------------------------------------
-        // Configuration: ใส่ Web App URL ของ Google Apps Script ที่นี่
-        // ---------------------------------------------------------
+        // URL ของ Google Apps Script ที่ใช้งานอยู่
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxD3-cA14WD0OT5251rLsr3foK-MtTmNHcrbsdvfetiHRD-p3jUpQsdvDf4q14vyCbw/exec';
 
         const form = document.getElementById('rsvpForm');
         const locationContainer = document.getElementById('locationContainer');
         const locationSelect = document.getElementById('location');
+        const attendeesSection = document.getElementById('attendeesSection');
+        const name1 = document.getElementById('name1');
+        const position1 = document.getElementById('position1');
+        const phone1 = document.getElementById('phone1');
 
-        // ฟังก์ชันควบคุมการแสดงผลและกำหนดการบังคับเลือก (Required) ของช่องรูปแบบการเข้าร่วม
-        function toggleLocationField() {
+        // ฟังก์ชันเปิด/ปิดการบังคับกรอกเมื่อเลือก เข้าร่วมได้ / ไม่สามารถเข้าร่วมได้
+        function toggleAttendanceFields() {
             const attendanceInput = document.querySelector('input[name="attendance"]:checked');
-            
-            if (!attendanceInput) return; 
-        
-            const attendanceValue = attendanceInput.value;
-        
-            if (attendanceValue === 'เข้าร่วมได้') {
-                locationContainer.classList.remove('hidden'); 
-                locationContainer.classList.remove('opacity-0');
-                locationSelect.required = true; // บังคับให้เลือกเมื่อเข้าร่วมได้
+            if (!attendanceInput) return;
+
+            if (attendanceInput.value === 'เข้าร่วมได้') {
+                locationContainer.classList.remove('hidden');
+                attendeesSection.classList.remove('hidden');
+                locationSelect.required = true;
+                name1.required = true;
+                position1.required = true;
+                phone1.required = true;
             } else {
-                locationContainer.classList.add('hidden'); 
-                locationContainer.classList.add('opacity-0');
-                locationSelect.required = false; // ยกเลิกการบังคับเมื่อไม่เข้าร่วม
-                locationSelect.value = ''; // ล้างค่าที่เลือกไว้
+                locationContainer.classList.add('hidden');
+                attendeesSection.classList.add('hidden');
+                locationSelect.required = false;
+                locationSelect.value = '';
+                name1.required = false;
+                position1.required = false;
+                phone1.required = false;
             }
-        }       
+        }
 
-        // Form submission handler
+        // การส่งข้อมูลเข้า Google Sheets
         form.addEventListener('submit', e => {
-            e.preventDefault(); 
+            e.preventDefault();
 
-            // แสดงสถานะกำลังบันทึก
             Swal.fire({
                 title: 'กำลังบันทึกข้อมูล...',
                 text: 'กรุณารอสักครู่',
@@ -154,35 +330,33 @@
                 }
             });
 
-            // ดึงค่าจากฟอร์มมาแปลงเป็น Object JSON
             const formData = new FormData(form);
             const data = {};
             formData.forEach((value, key) => {
                 data[key] = value;
             });
 
-            // หากเลือก "ไม่สามารถเข้าร่วมได้" ให้ส่งค่าช่อง location เป็นค่าว่าง
             if (data['attendance'] === 'ไม่สามารถเข้าร่วมได้') {
                 data['location'] = 'ไม่เข้าร่วมประชุม';
             }
 
-            // Demo mode fallback ถ้ายังไม่ได้เปลี่ยน URL
-            if (SCRIPT_URL === 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE') {
-                setTimeout(() => {
-                    showSuccessAndReset();
-                }, 1500);
-                return;
-            }
-
-            // ส่งข้อมูลไปยัง Google Apps Script
-            fetch(SCRIPT_URL, { 
-                method: 'POST', 
+            fetch(SCRIPT_URL, {
+                method: 'POST',
                 body: JSON.stringify(data)
             })
             .then(response => response.json())
             .then(result => {
                 if (result.result === 'success') {
-                    showSuccessAndReset();
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'บันทึกข้อมูลสำเร็จ!',
+                        text: 'ขอบคุณสำหรับการส่งแบบตอบรับเข้าร่วมประชุม',
+                        confirmButtonColor: '#1d4ed8',
+                        confirmButtonText: 'ตกลง'
+                    }).then(() => {
+                        form.reset();
+                        toggleAttendanceFields();
+                    });
                 } else {
                     throw new Error(result.error || 'Unknown error');
                 }
@@ -198,22 +372,6 @@
                 });
             });
         });
-
-        // Helper function เมื่อบันทึกสำเร็จ
-        function showSuccessAndReset() {
-            Swal.fire({
-                icon: 'success',
-                title: 'บันทึกข้อมูลสำเร็จ!',
-                text: 'ขอบคุณสำหรับการตอบรับเข้าร่วมประชุม',
-                confirmButtonColor: '#2563eb',
-                confirmButtonText: 'ตกลง'
-            }).then(() => {
-                form.reset(); 
-                toggleLocationField(); // ซ่อนกล่องตัวเลือกและรีเซ็ตค่า
-            });
-        }
     </script>
 </body>
 </html>
-
-```
