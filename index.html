@@ -54,29 +54,43 @@
             
             <!-- ส่วนที่ 1: ข้อมูลหน่วยงานและรูปแบบการเข้าร่วม -->
             <div class="space-y-5">
-                <h2 class="text-lg font-bold text-blue-900 border-b-2 border-blue-600 pb-2">
-                    1. ข้อมูลหน่วยงานและรูปแบบการเข้าร่วมประชุม
-                </h2>
+                <div class="border-b-2 border-blue-600 pb-2 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                    <h2 class="text-lg font-bold text-blue-900">
+                        1. ข้อมูลหน่วยงานและรูปแบบการเข้าร่วมประชุม
+                    </h2>
+                    <span id="editModeBadge" class="hidden inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-amber-100 text-amber-800 border border-amber-300">
+                        โหมดแก้ไขข้อมูลเดิม
+                    </span>
+                </div>
 
-                <!-- Hospital / Organization Dropdown -->
+                <!-- Hospital / Organization Dropdown + Load Existing Button -->
                 <div>
                     <label for="organization" class="block text-sm font-semibold text-gray-700 mb-1">
                         โรงพยาบาล / หน่วยงาน <span class="text-red-500">*</span>
                     </label>
-                    <select id="organization" name="organization" required
-                        class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none bg-white transition-colors">
-                        <option value="" disabled selected>-- กรุณาเลือกโรงพยาบาล / หน่วยงาน --</option>
-                        <option value="กรรมการ Hospital Media Academy">กรรมการ Hospital Media Academy</option>
-                        <option value="หน่วยงานสภาคริสตจักรฯ">หน่วยงานสภาคริสตจักรฯ</option>
-                        <option value="โรงพยาบาลแมคคอร์มิค">โรงพยาบาลแมคคอร์มิค</option>
-                        <option value="โรงพยาบาลโอเวอร์บรุ๊ค">โรงพยาบาลโอเวอร์บรุ๊ค</option>
-                        <option value="โรงพยาบาลกรุงเทพคริสเตียน">โรงพยาบาลกรุงเทพคริสเตียน</option>
-                        <option value="โรงพยาบาลกรุงเทพคริสเตียน นครปฐม">โรงพยาบาลกรุงเทพคริสเตียน นครปฐม</option>
-                        <option value="โรงพยาบาลแพร่คริสเตียน">โรงพยาบาลแพร่คริสเตียน</option>
-                        <option value="โรงพยาบาลแวนแซนด์วูร์ด">โรงพยาบาลแวนแซนด์วูร์ด</option>
-                        <option value="โรงพยาบาลคริสเตียนสังขละบุรี">โรงพยาบาลคริสเตียนสังขละบุรี</option>
-                        <option value="สถาบันผู้สูงอายุแมคเคน">สถาบันผู้สูงอายุแมคเคน</option>
-                    </select>
+                    <div class="flex flex-col sm:flex-row gap-2">
+                        <select id="organization" name="organization" required
+                            class="flex-1 px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none bg-white transition-colors">
+                            <option value="" disabled selected>-- กรุณาเลือกโรงพยาบาล / หน่วยงาน --</option>
+                            <option value="กรรมการ Hospital Media Academy">กรรมการ Hospital Media Academy</option>
+                            <option value="หน่วยงานสภาคริสตจักรฯ">หน่วยงานสภาคริสตจักรฯ</option>
+                            <option value="โรงพยาบาลแมคคอร์มิค">โรงพยาบาลแมคคอร์มิค</option>
+                            <option value="โรงพยาบาลโอเวอร์บรุ๊ค">โรงพยาบาลโอเวอร์บรุ๊ค</option>
+                            <option value="โรงพยาบาลกรุงเทพคริสเตียน">โรงพยาบาลกรุงเทพคริสเตียน</option>
+                            <option value="โรงพยาบาลกรุงเทพคริสเตียน นครปฐม">โรงพยาบาลกรุงเทพคริสเตียน นครปฐม</option>
+                            <option value="โรงพยาบาลแพร่คริสเตียน">โรงพยาบาลแพร่คริสเตียน</option>
+                            <option value="โรงพยาบาลแวนแซนด์วูร์ด">โรงพยาบาลแวนแซนด์วูร์ด</option>
+                            <option value="โรงพยาบาลคริสเตียนสังขละบุรี">โรงพยาบาลคริสเตียนสังขละบุรี</option>
+                            <option value="สถาบันผู้สูงอายุแมคเคน">สถาบันผู้สูงอายุแมคเคน</option>
+                        </select>
+                        <button type="button" onclick="loadExistingData()"
+                            class="px-4 py-2.5 bg-amber-500 hover:bg-amber-600 text-white font-semibold rounded-lg shadow-sm transition-colors text-sm whitespace-nowrap">
+                            ค้นหา/แก้ไขข้อมูลที่เคยส่ง
+                        </button>
+                    </div>
+                    <p class="text-xs text-gray-500 mt-1">
+                        * หากหน่วยงานของท่านเคยส่งข้อมูลแล้ว สามารถเลือกหน่วยงานแล้วกดปุ่ม <strong>"ค้นหา/แก้ไขข้อมูลที่เคยส่ง"</strong> เพื่อดึงข้อมูลเดิมมาแก้ไขได้
+                    </p>
                 </div>
 
                 <!-- Attendance Status -->
@@ -149,17 +163,17 @@
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
                         <div>
                             <label class="block text-xs font-medium text-gray-600 mb-1">ชื่อ-นามสกุล</label>
-                            <input type="text" name="name2" placeholder="ระบุชื่อ-นามสกุล (ถ้ามี)"
+                            <input type="text" id="name2" name="name2" placeholder="ระบุชื่อ-นามสกุล (ถ้ามี)"
                                 class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white text-sm">
                         </div>
                         <div>
                             <label class="block text-xs font-medium text-gray-600 mb-1">ตำแหน่ง</label>
-                            <input type="text" name="position2" placeholder="ระบุตำแหน่ง"
+                            <input type="text" id="position2" name="position2" placeholder="ระบุตำแหน่ง"
                                 class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white text-sm">
                         </div>
                         <div>
                             <label class="block text-xs font-medium text-gray-600 mb-1">เบอร์โทรศัพท์</label>
-                            <input type="tel" name="phone2" placeholder="ระบุเบอร์โทรศัพท์"
+                            <input type="tel" id="phone2" name="phone2" placeholder="ระบุเบอร์โทรศัพท์"
                                 class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white text-sm">
                         </div>
                     </div>
@@ -171,17 +185,17 @@
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
                         <div>
                             <label class="block text-xs font-medium text-gray-600 mb-1">ชื่อ-นามสกุล</label>
-                            <input type="text" name="name3" placeholder="ระบุชื่อ-นามสกุล (ถ้ามี)"
+                            <input type="text" id="name3" name="name3" placeholder="ระบุชื่อ-นามสกุล (ถ้ามี)"
                                 class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white text-sm">
                         </div>
                         <div>
                             <label class="block text-xs font-medium text-gray-600 mb-1">ตำแหน่ง</label>
-                            <input type="text" name="position3" placeholder="ระบุตำแหน่ง"
+                            <input type="text" id="position3" name="position3" placeholder="ระบุตำแหน่ง"
                                 class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white text-sm">
                         </div>
                         <div>
                             <label class="block text-xs font-medium text-gray-600 mb-1">เบอร์โทรศัพท์</label>
-                            <input type="tel" name="phone3" placeholder="ระบุเบอร์โทรศัพท์"
+                            <input type="tel" id="phone3" name="phone3" placeholder="ระบุเบอร์โทรศัพท์"
                                 class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white text-sm">
                         </div>
                     </div>
@@ -193,17 +207,17 @@
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
                         <div>
                             <label class="block text-xs font-medium text-gray-600 mb-1">ชื่อ-นามสกุล</label>
-                            <input type="text" name="name4" placeholder="ระบุชื่อ-นามสกุล (ถ้ามี)"
+                            <input type="text" id="name4" name="name4" placeholder="ระบุชื่อ-นามสกุล (ถ้ามี)"
                                 class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white text-sm">
                         </div>
                         <div>
                             <label class="block text-xs font-medium text-gray-600 mb-1">ตำแหน่ง</label>
-                            <input type="text" name="position4" placeholder="ระบุตำแหน่ง"
+                            <input type="text" id="position4" name="position4" placeholder="ระบุตำแหน่ง"
                                 class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white text-sm">
                         </div>
                         <div>
                             <label class="block text-xs font-medium text-gray-600 mb-1">เบอร์โทรศัพท์</label>
-                            <input type="tel" name="phone4" placeholder="ระบุเบอร์โทรศัพท์"
+                            <input type="tel" id="phone4" name="phone4" placeholder="ระบุเบอร์โทรศัพท์"
                                 class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white text-sm">
                         </div>
                     </div>
@@ -215,17 +229,17 @@
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
                         <div>
                             <label class="block text-xs font-medium text-gray-600 mb-1">ชื่อ-นามสกุล</label>
-                            <input type="text" name="name5" placeholder="ระบุชื่อ-นามสกุล (ถ้ามี)"
+                            <input type="text" id="name5" name="name5" placeholder="ระบุชื่อ-นามสกุล (ถ้ามี)"
                                 class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white text-sm">
                         </div>
                         <div>
                             <label class="block text-xs font-medium text-gray-600 mb-1">ตำแหน่ง</label>
-                            <input type="text" name="position5" placeholder="ระบุตำแหน่ง"
+                            <input type="text" id="position5" name="position5" placeholder="ระบุตำแหน่ง"
                                 class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white text-sm">
                         </div>
                         <div>
                             <label class="block text-xs font-medium text-gray-600 mb-1">เบอร์โทรศัพท์</label>
-                            <input type="tel" name="phone5" placeholder="ระบุเบอร์โทรศัพท์"
+                            <input type="tel" id="phone5" name="phone5" placeholder="ระบุเบอร์โทรศัพท์"
                                 class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white text-sm">
                         </div>
                     </div>
@@ -275,7 +289,7 @@
             <div class="pt-2">
                 <button type="submit"
                     class="w-full bg-blue-700 hover:bg-blue-800 text-white font-bold py-3.5 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 text-lg">
-                    ส่งแบบตอบรับการประชุม
+                    ตรวจสอบข้อมูลก่อนส่ง
                 </button>
             </div>
         </form>
@@ -289,11 +303,22 @@
         const locationContainer = document.getElementById('locationContainer');
         const locationSelect = document.getElementById('location');
         const attendeesSection = document.getElementById('attendeesSection');
+        const editModeBadge = document.getElementById('editModeBadge');
         const name1 = document.getElementById('name1');
         const position1 = document.getElementById('position1');
         const phone1 = document.getElementById('phone1');
 
-        // ฟังก์ชันเปิด/ปิดการบังคับกรอกเมื่อเลือก เข้าร่วมได้ / ไม่สามารถเข้าร่วมได้
+        // ฟังก์ชันป้องกันปัญหาอักขระพิเศษเมื่อแสดงผลใน HTML Preview
+        function escapeHtml(str) {
+            if (!str) return '-';
+            return String(str)
+                .replace(/&/g, '&')
+                .replace(/</g, '<')
+                .replace(/>/g, '>')
+                .replace(/"/g, '"');
+        }
+
+        // เปิด/ปิดการบังคับกรอกเมื่อเลือก เข้าร่วมได้ / ไม่สามารถเข้าร่วมได้
         function toggleAttendanceFields() {
             const attendanceInput = document.querySelector('input[name="attendance"]:checked');
             if (!attendanceInput) return;
@@ -316,9 +341,194 @@
             }
         }
 
-        // การส่งข้อมูลเข้า Google Sheets
+        // ฟังก์ชันดึงข้อมูลเดิมของหน่วยงานจาก Google Sheets มาแก้ไข
+        function loadExistingData() {
+            const orgSelect = document.getElementById('organization');
+            const selectedOrg = orgSelect.value;
+
+            if (!selectedOrg) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'กรุณาเลือกหน่วยงาน',
+                    text: 'โปรดเลือกโรงพยาบาลหรือหน่วยงานที่ต้องการค้นหาข้อมูลก่อนครับ',
+                    confirmButtonColor: '#1d4ed8',
+                    confirmButtonText: 'ตกลง'
+                });
+                return;
+            }
+
+            Swal.fire({
+                title: 'กำลังค้นหาข้อมูลเดิม...',
+                text: 'กรุณารอสักครู่',
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            });
+
+            fetch(SCRIPT_URL, {
+                method: 'POST',
+                body: JSON.stringify({
+                    action: 'get',
+                    organization: selectedOrg
+                })
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.result === 'found' && result.data) {
+                    populateForm(result.data);
+                    editModeBadge.classList.remove('hidden');
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'พบข้อมูลเดิม!',
+                        text: 'ระบบดึงข้อมูลล่าสุดของหน่วยงานท่านมาแสดงในฟอร์มเรียบร้อยแล้ว สามารถแก้ไขและกดส่งใหม่ได้ทันที',
+                        confirmButtonColor: '#1d4ed8',
+                        confirmButtonText: 'เริ่มแก้ไขข้อมูล'
+                    });
+                } else if (result.result === 'not_found') {
+                    editModeBadge.classList.add('hidden');
+                    Swal.fire({
+                        icon: 'info',
+                        title: 'ยังไม่พบประวัติการส่งข้อมูล',
+                        text: 'หน่วยงานนี้ยังไม่มีข้อมูลในระบบ ท่านสามารถกรอกข้อมูลใหม่ได้เลยครับ',
+                        confirmButtonColor: '#1d4ed8',
+                        confirmButtonText: 'ตกลง'
+                    });
+                } else {
+                    throw new Error(result.error || 'เกิดข้อผิดพลาดในการดึงข้อมูล');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'ไม่สามารถดึงข้อมูลได้',
+                    text: 'กรุณาตรวจสอบการอัปเดตโค้ด Google Apps Script (Deploy เวอร์ชันใหม่)',
+                    confirmButtonColor: '#d33',
+                    confirmButtonText: 'ตกลง'
+                });
+            });
+        }
+
+        // นำข้อมูลที่ดึงมาจาก Google Sheets มาเติมลงในฟอร์ม
+        function populateForm(record) {
+            if (record.attendance) {
+                const radio = document.querySelector(`input[name="attendance"][value="${record.attendance}"]`);
+                if (radio) radio.checked = true;
+            }
+            toggleAttendanceFields();
+
+            if (record.location && record.location !== 'ไม่เข้าร่วมประชุม') {
+                locationSelect.value = record.location;
+            }
+
+            for (let i = 1; i <= 5; i++) {
+                const nameEl = document.querySelector(`[name="name${i}"]`);
+                const posEl = document.querySelector(`[name="position${i}"]`);
+                const phoneEl = document.querySelector(`[name="phone${i}"]`);
+                if (nameEl) nameEl.value = record[`name${i}`] || '';
+                if (posEl) posEl.value = record[`position${i}`] || '';
+                if (phoneEl) phoneEl.value = record[`phone${i}`] || '';
+            }
+
+            document.getElementById('episodeTitle').value = record.episodeTitle || '';
+            document.getElementById('presentationTopic').value = record.presentationTopic || '';
+            document.getElementById('synopsis').value = record.synopsis || '';
+        }
+
+        // เมื่อกดปุ่ม "ตรวจสอบข้อมูลก่อนส่ง"
         form.addEventListener('submit', e => {
             e.preventDefault();
+
+            const formData = new FormData(form);
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = value.trim();
+            });
+
+            if (data['attendance'] === 'ไม่สามารถเข้าร่วมได้') {
+                data['location'] = 'ไม่เข้าร่วมประชุม';
+                for (let i = 1; i <= 5; i++) {
+                    data[`name${i}`] = '';
+                    data[`position${i}`] = '';
+                    data[`phone${i}`] = '';
+                }
+            }
+
+            // สร้างรายการผู้เข้าร่วมสำหรับแสดงในหน้าต่างตรวจสอบข้อมูล
+            let attendeesHtml = '';
+            if (data['attendance'] === 'เข้าร่วมได้') {
+                let count = 0;
+                for (let i = 1; i <= 5; i++) {
+                    if (data[`name${i}`]) {
+                        count++;
+                        attendeesHtml += `
+                            <div class="py-1.5 border-b border-gray-100 last:border-0">
+                                <span class="font-semibold text-gray-800">${i}. ${escapeHtml(data[`name${i}`])}</span>
+                                <div class="text-xs text-gray-600 pl-3">
+                                    ตำแหน่ง: ${escapeHtml(data[`position${i}`])} | โทร: ${escapeHtml(data[`phone${i}`])}
+                                </div>
+                            </div>
+                        `;
+                    }
+                }
+                if (count === 0) attendeesHtml = '<p class="text-gray-500">-</p>';
+            } else {
+                attendeesHtml = '<p class="text-red-600 font-medium">ไม่สามารถเข้าร่วมได้</p>';
+            }
+
+            // สร้าง HTML สรุปข้อมูลทั้งหมด
+            const summaryHtml = `
+                <div class="text-left text-sm space-y-3 bg-gray-50 p-4 rounded-xl border border-gray-200 max-h-96 overflow-y-auto">
+                    <div>
+                        <span class="text-xs font-semibold text-gray-500 block">โรงพยาบาล / หน่วยงาน</span>
+                        <span class="font-bold text-blue-900 text-base">${escapeHtml(data.organization)}</span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2 pt-1 border-t border-gray-200">
+                        <div>
+                            <span class="text-xs font-semibold text-gray-500 block">การเข้าร่วม</span>
+                            <span class="font-semibold text-gray-800">${escapeHtml(data.attendance)}</span>
+                        </div>
+                        <div>
+                            <span class="text-xs font-semibold text-gray-500 block">รูปแบบ</span>
+                            <span class="font-semibold text-gray-800">${escapeHtml(data.location)}</span>
+                        </div>
+                    </div>
+                    <div class="pt-2 border-t border-gray-200">
+                        <span class="text-xs font-semibold text-gray-500 block mb-1">รายชื่อผู้เข้าร่วมประชุม</span>
+                        ${attendeesHtml}
+                    </div>
+                    <div class="pt-2 border-t border-gray-200 space-y-1">
+                        <span class="text-xs font-semibold text-blue-700 block">สื่อคลิปวิดีโอ CCT Medical Ministry Series</span>
+                        <p><strong class="text-gray-700">ชื่อตอน:</strong> ${escapeHtml(data.episodeTitle)}</p>
+                        <p><strong class="text-gray-700">ประเด็นนำเสนอ:</strong> ${escapeHtml(data.presentationTopic)}</p>
+                        <p><strong class="text-gray-700">เนื้อเรื่องย่อ:</strong> ${escapeHtml(data.synopsis)}</p>
+                    </div>
+                </div>
+            `;
+
+            // แสดง Modal ให้ตรวจสอบก่อนส่ง หรือกดกลับไปแก้ไข
+            Swal.fire({
+                title: 'ตรวจสอบข้อมูลก่อนส่ง',
+                html: summaryHtml,
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#1d4ed8',
+                cancelButtonColor: '#64748b',
+                confirmButtonText: 'ยืนยันการส่งข้อมูล',
+                cancelButtonText: 'กลับไปแก้ไข',
+                reverseButtons: true,
+                width: '36rem'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    submitToGoogleSheets(data);
+                }
+            });
+        });
+
+        // ฟังก์ชันส่งข้อมูลจริงไปยัง Google Sheets
+        function submitToGoogleSheets(data) {
+            data.action = 'save';
 
             Swal.fire({
                 title: 'กำลังบันทึกข้อมูล...',
@@ -330,16 +540,6 @@
                 }
             });
 
-            const formData = new FormData(form);
-            const data = {};
-            formData.forEach((value, key) => {
-                data[key] = value;
-            });
-
-            if (data['attendance'] === 'ไม่สามารถเข้าร่วมได้') {
-                data['location'] = 'ไม่เข้าร่วมประชุม';
-            }
-
             fetch(SCRIPT_URL, {
                 method: 'POST',
                 body: JSON.stringify(data)
@@ -347,14 +547,19 @@
             .then(response => response.json())
             .then(result => {
                 if (result.result === 'success') {
+                    const actionText = result.mode === 'updated'
+                        ? 'อัปเดตแก้ไขข้อมูลของหน่วยงานท่านเรียบร้อยแล้ว'
+                        : 'ขอบคุณสำหรับการส่งแบบตอบรับเข้าร่วมประชุม';
+
                     Swal.fire({
                         icon: 'success',
                         title: 'บันทึกข้อมูลสำเร็จ!',
-                        text: 'ขอบคุณสำหรับการส่งแบบตอบรับเข้าร่วมประชุม',
+                        text: actionText,
                         confirmButtonColor: '#1d4ed8',
                         confirmButtonText: 'ตกลง'
                     }).then(() => {
                         form.reset();
+                        editModeBadge.classList.add('hidden');
                         toggleAttendanceFields();
                     });
                 } else {
@@ -371,7 +576,7 @@
                     confirmButtonText: 'ตกลง'
                 });
             });
-        });
+        }
     </script>
 </body>
 </html>
